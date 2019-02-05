@@ -3,7 +3,7 @@
     "rules": "storage.rules"
   },
   "hosting": {
-    // "public": "dist",
+    "public": "/home/travis/build/kenn44/assets/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
