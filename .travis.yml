@@ -3,7 +3,9 @@ node_js:
   - "node"
 script:
   - npm install
-before_deploy: npm run generate
+before_deploy: 
+  - npm run generate
+  - ls
 deploy:
   provider: firebase
   token:
