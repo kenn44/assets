@@ -21,10 +21,19 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    postcss: {
+      plugins: {
+        'postcss-preset-env': {
+          features: {
+            customProperties: false
+          }
+        }
+      }
+    },
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -34,6 +43,10 @@ module.exports = {
         })
       }
     }
-  }
+  },
+
+  modules: [
+    '@nuxtjs/bulma'
+  ]
 }
 
