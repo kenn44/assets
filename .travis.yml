@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - "node"
 script:
-  -
+  - npm install
+before_deploy: npm run generate
 deploy:
   provider: firebase
   token:
