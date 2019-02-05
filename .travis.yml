@@ -3,8 +3,8 @@ node_js:
   - "node"
 script:
   - npm install
-before_deploy: 
   - npm run generate
+before_deploy: 
   - ls
 deploy:
   provider: firebase
