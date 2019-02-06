@@ -1,6 +1,6 @@
-# assets
+# Assets Management App
 
-> Assets Management App
+[![Build Status](https://travis-ci.org/kenn44/assets.svg?branch=master)](https://travis-ci.org/kenn44/assets)
 
 ## Build Setup
 
