@@ -2,8 +2,8 @@
   <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <h2 class="title has-text-centered">Register!</h2>
+        <div class="column">
+          <h2 class="title has-text-centered">Register</h2>
 
           <Notification :message="error" v-if="error"/>
 
@@ -30,6 +30,9 @@
               <button type="submit" class="button is-dark is-fullwidth">Register</button>
             </div>
           </form>
+          <div style="margin-top: 20px">
+            <a class="btn btn-link level-right" href="#">Forgot Password?</a>
+          </div>
 
           <div class="has-text-centered" style="margin-top: 20px">Already got an account?
             <nuxt-link to="/login">Login</nuxt-link>

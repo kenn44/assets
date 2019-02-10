@@ -1,43 +1,42 @@
 <template>
-  <section class="container">
-    <div id="login">
-      <div class="login-card">
-        <div class="card-title">
-          <h1>Please Sign In</h1>
-        </div>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <h2 class="title has-text-centered">Register</h2>
 
-        <div class="content">
-          <form method="POST" action="#">
-            <input
-              id="email"
-              type="email"
-              name="email"
-              title="email"
-              placeholder="Email"
-              required
-              autofocus
-            >
-            <input
-              id="password"
-              type="password"
-              name="password"
-              title="password"
-              placeholder="Password"
-              required
-            >
+          <Notification :message="error" v-if="error"/>
 
-            <div class="level options">
-              <div class="checkbox level-left">
-                <input type="checkbox" id="checkbox" class="regular-checkbox">
-                <label for="checkbox"></label>
-                <span>Remember me</span>
+          <form method="post" @submit.prevent="register">
+            <div class="field">
+              <label class="label">Username</label>
+              <div class="control">
+                <input type="text" class="input" name="username" v-model="username" required>
               </div>
-
-              <a class="btn btn-link level-right" href="#">Forgot Password?</a>
             </div>
-
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input type="email" class="input" name="email" v-model="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input type="password" class="input" name="password" v-model="password" required>
+              </div>
+            </div>
+            <div class="control">
+              <button type="submit" class="button is-dark is-fullwidth">Register</button>
+            </div>
           </form>
+          <div style="margin-top: 20px">
+            <a class="btn btn-link level-right" href="#">Forgot Password?</a>
+          </div>
+
+          <div class="has-text-centered" style="margin-top: 20px">Already got an account?
+            <nuxt-link to="/login">Login</nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -45,7 +44,22 @@
 </template>
 
 <script>
+import Notification from "~/components/Notification";
+
 export default {
+  components: {
+    Notification
+  },
+
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+      error: null
+    };
+  },
+
   methods: {
     async createUser() {
       try {
@@ -55,6 +69,26 @@ export default {
         );
       } catch (e) {
         alert(e);
+      }
+    },
+    async register() {
+      try {
+        await this.$axios.post("register", {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        });
+
+        await this.$auth.loginWith("local", {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        });
+
+        this.$router.push("/");
+      } catch (e) {
+        this.error = e.response.data.message;
       }
     }
   }

@@ -74,6 +74,12 @@ module.exports = {
   ],
 
   auth: {
+    redirect: {
+      login: '/register/login',
+      logout: '/',
+      callback: '/register/login',
+      home: '/'
+    },
     strategies: {
       local: {
         endpoints: {
