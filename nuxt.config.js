@@ -46,7 +46,30 @@ module.exports = {
   },
 
   modules: [
-    '@nuxtjs/bulma'
+    '@nuxtjs/bulma',
+    [
+      'nuxt-fire',
+      {
+        config: {
+          development: {
+            apiKey: 'AIzaSyBtg8nFf65H31P2M0iRtyiZudxVlFEtoUM',
+            authDomain: 'assets-mngt.firebaseapp.com',
+            databaseURL: 'https://assets-mngt.firebaseio.com',
+            projectId: 'assets-mngt',
+            storageBucket: 'assets-mngt.appspot.com',
+            messagingSenderId: '98375434890'
+          },
+          production: {
+            apiKey: 'AIzaSyBtg8nFf65H31P2M0iRtyiZudxVlFEtoUM',
+            authDomain: 'assets-mngt.firebaseapp.com',
+            databaseURL: 'https://assets-mngt.firebaseio.com',
+            projectId: 'assets-mngt',
+            storageBucket: 'assets-mngt.appspot.com',
+            messagingSenderId: '98375434890'
+          }
+        }
+      }
+    ]
   ]
 }
 
