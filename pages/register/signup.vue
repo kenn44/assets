@@ -9,12 +9,6 @@
 
           <form method="post" @submit.prevent="register">
             <div class="field">
-              <label class="label">Username</label>
-              <div class="control">
-                <input type="text" class="input" name="username" v-model="username" required>
-              </div>
-            </div>
-            <div class="field">
               <label class="label">Email</label>
               <div class="control">
                 <input type="email" class="input" name="email" v-model="email" required>
@@ -53,7 +47,6 @@ export default {
 
   data() {
     return {
-      username: "",
       email: "",
       password: "",
       error: null
@@ -61,6 +54,27 @@ export default {
   },
 
   methods: {
+    async register() {
+      await this.$store
+        .dispatch("signUpWithEmail", {
+          email: this.email,
+          password: this.password
+        })
+        .catch(err => {
+          //console.log(e.message);
+          this.error = err.message;
+        });
+    },
+    async googleSignUp() {
+      this.$store
+        .dispatch("signInWithGoogle")
+        .then(() => {
+          console.log("inside then statement on login");
+        })
+        .catch(e => {
+          console.log(e.message);
+        });
+    },
     async createUser() {
       try {
         await this.$fireAuth.createUserWithEmailAndPassword(
@@ -70,27 +84,27 @@ export default {
       } catch (e) {
         alert(e);
       }
-    },
-    async register() {
-      try {
-        await this.$axios.post("register", {
-          username: this.username,
-          email: this.email,
-          password: this.password
-        });
-
-        await this.$auth.loginWith("local", {
-          data: {
-            email: this.email,
-            password: this.password
-          }
-        });
-
-        this.$router.push("/");
-      } catch (e) {
-        this.error = e.response.data.message;
-      }
     }
+    // async register() {
+    //   try {
+    //     await this.$axios.post("register", {
+    //       username: this.username,
+    //       email: this.email,
+    //       password: this.password
+    //     });
+
+    //     await this.$auth.loginWith("local", {
+    //       data: {
+    //         email: this.email,
+    //         password: this.password
+    //       }
+    //     });
+
+    //     this.$router.push("/");
+    //   } catch (e) {
+    //     this.error = e.response.data.message;
+    //   }
+    // }
   }
 };
 </script>

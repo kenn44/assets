@@ -28,10 +28,27 @@ const createStore = () => {
                 })
             },
 
-            signOut({ commit }) {
-                auth.signOut().then(() => {
+            async signOut({ commit }) {
+                await auth.signOut().then(() => {
                     commit('setUser', null)
-                }).catch(err => console.log(error))
+                }).catch(err => console.log(err))
+            },
+
+            async signUpWithEmail({ commit }, user) {
+                await auth.createUserWithEmailAndPassword(user.email, user.password)
+                    .then((user) => {
+                        commit('setUser', user)
+                    }).catch(err => console.log(err))
+            },
+
+            async signInWithEmail({ commit }) {
+                await auth.signOut().then(() => {
+                    commit('setUser', null)
+                }).catch(err => {
+                    //console.log(err);
+                    this.error = err.message;
+                    console.log(error);
+                })
             }
         }
     })

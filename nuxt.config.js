@@ -47,7 +47,6 @@ module.exports = {
 
   modules: [
     '@nuxtjs/bulma',
-    '@nuxtjs/auth',
     [
       'nuxt-fire',
       {
@@ -71,24 +70,6 @@ module.exports = {
         }
       }
     ]
-  ],
-
-  auth: {
-    redirect: {
-      login: '/register/login',
-      logout: '/',
-      callback: '/register/login',
-      home: '/'
-    },
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
-          logout: false
-        }
-      }
-    }
-  }
+  ]
 }
 
