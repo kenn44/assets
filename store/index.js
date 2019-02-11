@@ -9,11 +9,17 @@ const createStore = () => {
         getters: {
             activeUser: (state, getters) => {
                 return state.user
+            },
+            isLoading: (state, getters) => {
+                return state.loading
             }
         },
         mutations: {
             setUser(state, payload) {
                 state.user = payload
+            },
+            setLoading(state, payload) {
+                state.loading = payload
             }
         },
         actions: {
@@ -37,19 +43,22 @@ const createStore = () => {
             async signUpWithEmail({ commit }, user) {
                 await auth.createUserWithEmailAndPassword(user.email, user.password)
                     .then((user) => {
-                        commit('setUser', user)
-                    }).catch(err => console.log(err))
+                        commit('setUser', user.user)
+                    }).catch(err => {
+                        console.log(err);
+                        this.error = err.message;
+                    })
             },
 
-            async signInWithEmail({ commit }) {
-                await auth.signOut().then(() => {
-                    commit('setUser', null)
-                }).catch(err => {
-                    //console.log(err);
-                    this.error = err.message;
-                    console.log(error);
-                })
-            }
+            async signInWithEmail({ commit }, user) {
+                await auth.signInWithEmailAndPassword(user.email, user.password)
+                    .then((user) => {
+                        commit('setUser', user.user)
+                    }).catch(err => {
+                        console.log(err);
+                        this.error = err.message;
+                    })
+            },
         }
     })
 }

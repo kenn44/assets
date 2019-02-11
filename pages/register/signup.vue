@@ -24,12 +24,9 @@
               <button type="submit" class="button is-dark is-fullwidth">Register</button>
             </div>
           </form>
-          <div style="margin-top: 20px">
-            <a class="btn btn-link level-right" href="#">Forgot Password?</a>
-          </div>
 
           <div class="has-text-centered" style="margin-top: 20px">Already got an account?
-            <nuxt-link to="/login">Login</nuxt-link>
+            <nuxt-link to="/register/login">Login</nuxt-link>
           </div>
         </div>
       </div>
@@ -61,8 +58,8 @@ export default {
           password: this.password
         })
         .catch(err => {
-          //console.log(e.message);
           this.error = err.message;
+          console.log(err);
         });
     },
     async googleSignUp() {

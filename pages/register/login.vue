@@ -3,17 +3,11 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h2 class="title has-text-centered">Register</h2>
+          <h2 class="title has-text-centered">Login</h2>
 
           <Notification :message="error" v-if="error"/>
 
-          <form method="post" @submit.prevent="register">
-            <div class="field">
-              <label class="label">Username</label>
-              <div class="control">
-                <input type="text" class="input" name="username" v-model="username" required>
-              </div>
-            </div>
+          <form method="post" @submit.prevent="login">
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
@@ -27,15 +21,12 @@
               </div>
             </div>
             <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">Register</button>
+              <button type="submit" class="button is-dark is-fullwidth">Login</button>
             </div>
           </form>
-          <div style="margin-top: 20px">
-            <a class="btn btn-link level-right" href="#">Forgot Password?</a>
-          </div>
 
-          <div class="has-text-centered" style="margin-top: 20px">Already got an account?
-            <nuxt-link to="/login">Login</nuxt-link>
+          <div class="has-text-centered" style="margin-top: 20px">No account?
+            <nuxt-link to="/register/signup">Register</nuxt-link>
           </div>
         </div>
       </div>
@@ -61,35 +52,16 @@ export default {
   },
 
   methods: {
-    async createUser() {
-      try {
-        await this.$fireAuth.createUserWithEmailAndPassword(
-          "foo@foo.foo",
-          "tessaaaaaaaaaa"
-        );
-      } catch (e) {
-        alert(e);
-      }
-    },
-    async register() {
-      try {
-        await this.$axios.post("register", {
-          username: this.username,
+    async login() {
+      await this.$store
+        .dispatch("signInWithEmail", {
           email: this.email,
           password: this.password
+        })
+        .catch(err => {
+          this.error = err.message;
+          console.log(err);
         });
-
-        await this.$auth.loginWith("local", {
-          data: {
-            email: this.email,
-            password: this.password
-          }
-        });
-
-        this.$router.push("/");
-      } catch (e) {
-        this.error = e.response.data.message;
-      }
     }
   }
 };

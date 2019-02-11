@@ -70,6 +70,12 @@ module.exports = {
         }
       }
     ]
-  ]
+  ],
+  router: {
+    middleware: 'router-auth'
+  },
+  plugins: [
+    '~/plugins/fireauth.js'
+  ],
 }
 
