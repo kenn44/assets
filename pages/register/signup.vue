@@ -38,6 +38,7 @@
 import Notification from "~/components/Notification";
 
 export default {
+  props: ["error"],
   components: {
     Notification
   },

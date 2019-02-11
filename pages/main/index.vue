@@ -17,6 +17,7 @@ import AppLogo from "~/components/AppLogo.vue";
 
 export default {
   // middleware: "router-auth",
+  props: ["user"],
   components: {
     AppLogo
   }
