@@ -57,31 +57,34 @@ export default {
           email: this.email,
           password: this.password
         })
+        .then(() => {
+          console.log("inside then statement on login");
+        })
         .catch(err => {
           this.error = err.message;
           console.log(err);
         });
-    },
-    async googleSignUp() {
-      this.$store
-        .dispatch("signInWithGoogle")
-        .then(() => {
-          console.log("inside then statement on login");
-        })
-        .catch(e => {
-          console.log(e.message);
-        });
-    },
-    async createUser() {
-      try {
-        await this.$fireAuth.createUserWithEmailAndPassword(
-          "foo@foo.foo",
-          "tessaaaaaaaaaa"
-        );
-      } catch (e) {
-        alert(e);
-      }
     }
+    // async googleSignUp() {
+    //   this.$store
+    //     .dispatch("signInWithGoogle")
+    //     .then(() => {
+    //       console.log("inside then statement on login");
+    //     })
+    //     .catch(e => {
+    //       console.log(e.message);
+    //     });
+    // },
+    // async createUser() {
+    //   try {
+    //     await this.$fireAuth.createUserWithEmailAndPassword(
+    //       "foo@foo.foo",
+    //       "tessaaaaaaaaaa"
+    //     );
+    //   } catch (e) {
+    //     alert(e);
+    //   }
+    // }
     // async register() {
     //   try {
     //     await this.$axios.post("register", {

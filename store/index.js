@@ -27,13 +27,6 @@ const createStore = () => {
                 commit('setUser', payload)
             },
 
-            signInWithGoogle({ commit }) {
-                return new Promise((resolve, reject) => {
-                    auth.signInWithRedirect(GoogleProvider)
-                    resolve()
-                })
-            },
-
             async signOut({ commit }) {
                 await auth.signOut().then(() => {
                     commit('setUser', null)
