@@ -42,7 +42,40 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    // vendor: [
+    //   'axios',
+    //   'firebase',
+    //   '~/plugins/fireauth.js'
+    // ],
+    // maxChunkSize: 300000,
+    // extractCSS: true,
+    // analyze: {
+    //   analyzerMode: 'static'
+    // }
+    // optimization: {
+    //   splitChunks: {
+    //     chunks: 'all',
+    //     minSize: 3,
+    //     maxSize: 3000,
+    //     minChunks: 1,
+    //     maxAsyncRequests: 5,
+    //     maxInitialRequests: 3,
+    //     automaticNameDelimiter: '.',
+    //     name: true,
+    //     cacheGroups: {
+    //       vendors: {
+    //         test: /[\\/]node_modules[\\/]/,
+    //         priority: -10
+    //       },
+    //       default: {
+    //         minChunks: 2,
+    //         priority: -20,
+    //         reuseExistingChunk: true
+    //       }
+    //     }
+    //   }
+    // }
   },
 
   modules: [
@@ -77,5 +110,6 @@ module.exports = {
   plugins: [
     '~/plugins/fireauth.js'
   ],
+
 }
 
